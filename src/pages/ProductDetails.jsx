@@ -5,6 +5,7 @@ import {
   ShoppingCart,
 } from 'lucide-react'
 import { getImageUrl } from '../services/ImageService'
+import { getToken } from '../services/AuthService'
 
 
 import {
@@ -52,7 +53,7 @@ function ProductDetails() {
       return
     }
 
-    if (!sessionStorage.getItem('shopshere_token')) {
+    if (!getToken()) {
       navigate('/login')
       return
     }

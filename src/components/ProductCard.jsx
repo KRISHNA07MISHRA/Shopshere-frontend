@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Heart, ShoppingCart } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../services/ImageService'
+import { getToken } from '../services/AuthService'
 import {
   getWishlist,
   addToWishlist,
@@ -24,7 +25,7 @@ function ProductCard({ product }) {
   useEffect(() => {
     let cancelled = false
 
-    if (!sessionStorage.getItem('shopshere_token')) {
+    if (!getToken()) {
 
       return () => {
         cancelled = true
@@ -56,7 +57,7 @@ function ProductCard({ product }) {
 
     if (loading) return
 
-    if (!sessionStorage.getItem('shopshere_token')) {
+    if (!getToken()) {
       navigate('/login')
       return
     }
@@ -89,7 +90,7 @@ function ProductCard({ product }) {
 
     if (cartLoading) return
 
-    if (!sessionStorage.getItem('shopshere_token')) {
+    if (!getToken()) {
       navigate('/login')
       return
     }
